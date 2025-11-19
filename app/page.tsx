@@ -11,9 +11,17 @@ import { Sparkles, Mic, Heart, Shield, Clock, Zap, Stethoscope, Brain, Activity,
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
+  const [particlePositions, setParticlePositions] = useState<{ x: number; y: number }[]>([]);
 
   useEffect(() => {
     setIsVisible(true);
+
+    const positions = Array.from({ length: 25 }).map(() => ({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+    }));
+
+    setParticlePositions(positions);
   }, []);
 
   return (
@@ -22,14 +30,11 @@ export default function Home() {
       
       {/* Floating Particles */}
       <div className="absolute inset-0 overflow-hidden">
-        {[...Array(25)].map((_, i) => (
+        {particlePositions.map((pos, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-cyan-400 rounded-full opacity-40"
-            initial={{ 
-              x: Math.random() * window.innerWidth, 
-              y: Math.random() * window.innerHeight 
-            }}
+            initial={{ x: pos.x, y: pos.y }}
             animate={{
               y: [0, -40, 0],
               opacity: [0.2, 0.7, 0.2],
