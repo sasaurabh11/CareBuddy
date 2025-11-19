@@ -23,8 +23,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CareBuddy",
-  description: "CareBuddy is voice based medical AI helper",
+  title: "CareBuddy - AI-Powered Healthcare Assistant",
+  description: "CareBuddy is a voice-based medical AI helper that enhances clinical care with smart voice assistants",
+  keywords: "healthcare, AI, voice assistant, medical, patient care",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
@@ -34,13 +38,38 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" className="dark">
+        <head>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                try {
+                  if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark')
+                  } else {
+                    document.documentElement.classList.remove('dark')
+                  }
+                } catch (_) {}
+              `,
+            }}
+          />
+        </head>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-900 text-white`}
         >
           <Provider>
             {children}
-            <Toaster />
+            <Toaster 
+              position="top-right"
+              theme="dark"
+              toastOptions={{
+                style: {
+                  background: '#1f2937',
+                  color: '#fff',
+                  border: '1px solid #374151',
+                },
+              }}
+            />
           </Provider>
         </body>
       </html>

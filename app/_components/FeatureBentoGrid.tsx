@@ -2,54 +2,78 @@
 import { cn } from "@/lib/utils";
 import React from "react";
 import {
-  IconBoxAlignRightFilled,
-  IconClipboardCopy,
-  IconFileBroken,
-  IconSignature,
-  IconTableColumn,
+  IconMicrophone,
+  IconHeartbeat,
+  IconShieldCheck,
+  IconClock,
+  IconUserCheck,
+  IconBrain,
+  IconStethoscope,
+  IconMessage,
+  IconCalendarEvent,
+  IconReportMedical,
 } from "@tabler/icons-react";
 import { motion } from "motion/react";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 
 export function FeatureBentoGrid() {
   return (
-    <BentoGrid className="max-w-4xl mx-auto md:auto-rows-[20rem]">
-      {items.map((item, i) => (
-        <BentoGridItem
-          key={i}
-          title={item.title}
-          description={item.description}
-          header={item.header}
-          className={cn("[&>p:text-lg]", item.className)}
-          icon={item.icon}
-        />
-      ))}
-    </BentoGrid>
+    <div className="max-w-7xl mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-16"
+      >
+        <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-4">
+          Smart Healthcare Features
+        </h2>
+        <p className="text-xl text-slate-400 max-w-3xl mx-auto">
+          Discover how our AI voice assistant transforms patient care with intelligent, 
+          personalized healthcare solutions
+        </p>
+      </motion.div>
+      
+      <BentoGrid className="max-w-6xl mx-auto md:auto-rows-[22rem]">
+        {items.map((item, i) => (
+          <BentoGridItem
+            key={i}
+            title={item.title}
+            description={item.description}
+            header={item.header}
+            className={cn(
+              "border border-slate-700/50 bg-slate-900/30 backdrop-blur-sm",
+              "[&>p:text-lg]",
+              item.className
+            )}
+            icon={item.icon}
+          />
+        ))}
+      </BentoGrid>
+    </div>
   );
 }
 
-const SkeletonOne = () => {
-  const variants = {
-    initial: {
-      x: 0,
-    },
-    animate: {
-      x: 10,
-      rotate: 5,
+const VoiceAssistantSkeleton = () => {
+  const voiceVariants = {
+    initial: { x: 0, opacity: 0.8 },
+    animate: { 
+      x: 10, 
+      opacity: 1,
       transition: {
-        duration: 0.2,
+        duration: 0.3,
       },
     },
   };
-  const variantsSecond = {
-    initial: {
-      x: 0,
-    },
-    animate: {
-      x: -10,
-      rotate: -5,
+  
+  const responseVariants = {
+    initial: { x: 0, opacity: 0.8 },
+    animate: { 
+      x: -10, 
+      opacity: 1,
       transition: {
-        duration: 0.2,
+        duration: 0.3,
+        delay: 0.2,
       },
     },
   };
@@ -58,205 +82,202 @@ const SkeletonOne = () => {
     <motion.div
       initial="initial"
       whileHover="animate"
-      className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2"
+      className="flex flex-1 w-full h-full min-h-[6rem] bg-gradient-to-br from-cyan-900/20 to-blue-900/20 rounded-xl flex-col space-y-3 p-4"
     >
       <motion.div
-        variants={variants}
-        className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2  items-center space-x-2 bg-white dark:bg-black"
+        variants={voiceVariants}
+        className="flex flex-row rounded-2xl border border-cyan-500/30 p-3 items-center space-x-3 bg-cyan-900/20 backdrop-blur-sm"
       >
-        <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 shrink-0" />
-        <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
+        <div className="h-8 w-8 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 shrink-0 flex items-center justify-center">
+          <IconMicrophone className="h-4 w-4 text-white" />
+        </div>
+        <div className="w-full bg-cyan-800/30 h-4 rounded-full" />
       </motion.div>
+      
       <motion.div
-        variants={variantsSecond}
-        className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2 items-center space-x-2 w-3/4 ml-auto bg-white dark:bg-black"
+        variants={responseVariants}
+        className="flex flex-row rounded-2xl border border-blue-500/30 p-3 items-center space-x-3 w-4/5 ml-auto bg-blue-900/20 backdrop-blur-sm"
       >
-        <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
-        <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 shrink-0" />
+        <div className="w-full bg-blue-800/30 h-4 rounded-full" />
+        <div className="h-8 w-8 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 shrink-0 flex items-center justify-center">
+          <IconBrain className="h-4 w-4 text-white" />
+        </div>
       </motion.div>
+      
       <motion.div
-        variants={variants}
-        className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2 items-center space-x-2 bg-white dark:bg-black"
+        variants={voiceVariants}
+        className="flex flex-row rounded-2xl border border-cyan-500/30 p-3 items-center space-x-3 bg-cyan-900/20 backdrop-blur-sm"
       >
-        <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 shrink-0" />
-        <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
+        <div className="h-8 w-8 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 shrink-0 flex items-center justify-center">
+          <IconMicrophone className="h-4 w-4 text-white" />
+        </div>
+        <div className="w-full bg-cyan-800/30 h-4 rounded-full" />
       </motion.div>
     </motion.div>
   );
 };
-const SkeletonTwo = () => {
+
+const AppointmentScheduler = () => {
   const variants = {
-    initial: {
-      width: 0,
-    },
-    animate: {
+    initial: { width: 0 },
+    animate: { 
       width: "100%",
       transition: {
-        duration: 0.2,
+        duration: 0.3,
       },
     },
     hover: {
       width: ["0%", "100%"],
       transition: {
-        duration: 2,
+        duration: 1.5,
       },
     },
   };
-  const arr = new Array(6).fill(0);
+  
+  const appointments = [
+    { time: "09:00 AM", patient: "Dr. Smith - Cardiology", duration: 70 },
+    { time: "10:30 AM", patient: "Blood Work - Lab", duration: 85 },
+    { time: "02:15 PM", patient: "Physical Therapy", duration: 60 },
+    { time: "04:00 PM", patient: "Dr. Johnson - Follow-up", duration: 45 },
+  ];
+
   return (
     <motion.div
       initial="initial"
       animate="animate"
       whileHover="hover"
-      className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2"
+      className="flex flex-1 w-full h-full min-h-[6rem] bg-gradient-to-br from-emerald-900/20 to-green-900/20 rounded-xl flex-col space-y-3 p-4"
     >
-      {arr.map((_, i) => (
+      {appointments.map((appointment, i) => (
         <motion.div
-          key={"skelenton-two" + i}
+          key={i}
           variants={variants}
           style={{
-            maxWidth: Math.random() * (100 - 40) + 40 + "%",
+            maxWidth: `${appointment.duration}%`,
           }}
-          className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2  items-center space-x-2 bg-neutral-100 dark:bg-black w-full h-4"
-        ></motion.div>
+          className="flex flex-row rounded-xl border border-emerald-500/30 p-2 items-center space-x-2 bg-emerald-900/30 backdrop-blur-sm w-full h-6"
+        >
+          <div className="text-xs text-emerald-300 font-medium px-2">
+            {appointment.time}
+          </div>
+          <div className="text-xs text-emerald-200 truncate">
+            {appointment.patient}
+          </div>
+        </motion.div>
       ))}
     </motion.div>
   );
 };
-const SkeletonThree = () => {
+
+const HealthMonitoring = () => {
   const variants = {
     initial: {
       backgroundPosition: "0 50%",
     },
     animate: {
-      backgroundPosition: ["0, 50%", "100% 50%", "0 50%"],
+      backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
     },
   };
+  
   return (
     <motion.div
       initial="initial"
       animate="animate"
       variants={variants}
       transition={{
-        duration: 5,
+        duration: 8,
         repeat: Infinity,
         repeatType: "reverse",
       }}
-      className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] rounded-lg bg-dot-black/[0.2] flex-col space-y-2"
+      className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl flex-col space-y-2 relative overflow-hidden"
       style={{
         background:
-          "linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)",
+          "linear-gradient(-45deg, #0ea5e9, #06b6d4, #10b981, #84cc16)",
         backgroundSize: "400% 400%",
       }}
     >
-      <motion.div className="h-full w-full rounded-lg"></motion.div>
+      <div className="absolute inset-0 bg-black/20 backdrop-blur-sm" />
+      <div className="relative z-10 p-4 flex flex-col h-full justify-center items-center">
+        <IconHeartbeat className="h-12 w-12 text-white mb-4" />
+        <div className="text-white font-bold text-lg text-center">
+          Real-time Health Monitoring
+        </div>
+        <div className="text-white/80 text-sm text-center mt-2">
+          Continuous patient data tracking
+        </div>
+      </div>
     </motion.div>
   );
 };
-const SkeletonFour = () => {
+
+const PatientProfiles = () => {
   const first = {
-    initial: {
-      x: 20,
-      rotate: -5,
-    },
-    hover: {
-      x: 0,
-      rotate: 0,
-    },
+    initial: { x: 20, rotate: -5, opacity: 0.8 },
+    hover: { x: 0, rotate: 0, opacity: 1 },
   };
+  
   const second = {
-    initial: {
-      x: -20,
-      rotate: 5,
-    },
-    hover: {
-      x: 0,
-      rotate: 0,
-    },
+    initial: { x: -20, rotate: 5, opacity: 0.8 },
+    hover: { x: 0, rotate: 0, opacity: 1 },
   };
+
+  const patients = [
+    { name: "Sarah Chen", condition: "Diabetes", status: "Stable", color: "green" },
+    { name: "Mike Rodriguez", condition: "Hypertension", status: "Monitoring", color: "blue" },
+    { name: "Emma Wilson", condition: "Post-op Recovery", status: "Improving", color: "purple" },
+  ];
+
   return (
     <motion.div
       initial="initial"
       animate="animate"
       whileHover="hover"
-      className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-row space-x-2"
+      className="flex flex-1 w-full h-full min-h-[6rem] bg-gradient-to-br from-purple-900/20 to-pink-900/20 rounded-xl flex-row space-x-3 p-4"
     >
-      <motion.div
-        variants={first}
-        className="h-full w-1/3 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center"
-      >
-        <img
-          src="https://pbs.twimg.com/profile_images/1417752099488636931/cs2R59eW_400x400.jpg"
-          alt="avatar"
-          height="100"
-          width="100"
-          className="rounded-full h-10 w-10"
-        />
-        <p className="sm:text-sm text-xs text-center font-semibold text-neutral-500 mt-4">
-          Just code in Vanilla Javascript
-        </p>
-        <p className="border border-red-500 bg-red-100 dark:bg-red-900/20 text-red-600 text-xs rounded-full px-2 py-0.5 mt-4">
-          Delusional
-        </p>
-      </motion.div>
-      <motion.div className="h-full relative z-20 w-1/3 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center">
-        <img
-          src="https://pbs.twimg.com/profile_images/1417752099488636931/cs2R59eW_400x400.jpg"
-          alt="avatar"
-          height="100"
-          width="100"
-          className="rounded-full h-10 w-10"
-        />
-        <p className="sm:text-sm text-xs text-center font-semibold text-neutral-500 mt-4">
-          Tailwind CSS is cool, you know
-        </p>
-        <p className="border border-green-500 bg-green-100 dark:bg-green-900/20 text-green-600 text-xs rounded-full px-2 py-0.5 mt-4">
-          Sensible
-        </p>
-      </motion.div>
-      <motion.div
-        variants={second}
-        className="h-full w-1/3 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center"
-      >
-        <img
-          src="https://pbs.twimg.com/profile_images/1417752099488636931/cs2R59eW_400x400.jpg"
-          alt="avatar"
-          height="100"
-          width="100"
-          className="rounded-full h-10 w-10"
-        />
-        <p className="sm:text-sm text-xs text-center font-semibold text-neutral-500 mt-4">
-          I love angular, RSC, and Redux.
-        </p>
-        <p className="border border-orange-500 bg-orange-100 dark:bg-orange-900/20 text-orange-600 text-xs rounded-full px-2 py-0.5 mt-4">
-          Helpless
-        </p>
-      </motion.div>
+      {patients.map((patient, index) => (
+        <motion.div
+          key={index}
+          variants={index === 0 ? first : index === 2 ? second : {}}
+          className={`h-full w-1/3 rounded-2xl bg-gradient-to-br from-${patient.color}-900/30 to-${patient.color}-800/30 p-4 border border-${patient.color}-500/30 flex flex-col items-center justify-center backdrop-blur-sm`}
+        >
+          <div className={`h-12 w-12 rounded-full bg-${patient.color}-500/20 flex items-center justify-center mb-3`}>
+            <IconUserCheck className={`h-6 w-6 text-${patient.color}-300`} />
+          </div>
+          <p className="text-sm text-center font-semibold text-white mt-2">
+            {patient.name}
+          </p>
+          <p className="text-xs text-center text-slate-300 mt-1">
+            {patient.condition}
+          </p>
+          <p className={`border border-${patient.color}-500 bg-${patient.color}-900/30 text-${patient.color}-300 text-xs rounded-full px-2 py-1 mt-3`}>
+            {patient.status}
+          </p>
+        </motion.div>
+      ))}
     </motion.div>
   );
 };
-const SkeletonFive = () => {
+
+const SymptomAnalysis = () => {
   const variants = {
-    initial: {
-      x: 0,
-    },
-    animate: {
-      x: 10,
-      rotate: 5,
+    initial: { x: 0, opacity: 0.8 },
+    animate: { 
+      x: 10, 
+      opacity: 1,
       transition: {
-        duration: 0.2,
+        duration: 0.3,
       },
     },
   };
-  const variantsSecond = {
-    initial: {
-      x: 0,
-    },
-    animate: {
-      x: -10,
-      rotate: -5,
+  
+  const responseVariants = {
+    initial: { x: 0, opacity: 0.8 },
+    animate: { 
+      x: -10, 
+      opacity: 1,
       transition: {
-        duration: 0.2,
+        duration: 0.3,
+        delay: 0.2,
       },
     },
   };
@@ -265,89 +286,87 @@ const SkeletonFive = () => {
     <motion.div
       initial="initial"
       whileHover="animate"
-      className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2"
+      className="flex flex-1 w-full h-full min-h-[6rem] bg-gradient-to-br from-orange-900/20 to-red-900/20 rounded-xl flex-col space-y-3 p-4"
     >
       <motion.div
         variants={variants}
-        className="flex flex-row rounded-2xl border border-neutral-100 dark:border-white/[0.2] p-2  items-start space-x-2 bg-white dark:bg-black"
+        className="flex flex-row rounded-2xl border border-orange-500/30 p-3 items-start space-x-3 bg-orange-900/20 backdrop-blur-sm"
       >
-        <img
-          src="https://pbs.twimg.com/profile_images/1417752099488636931/cs2R59eW_400x400.jpg"
-          alt="avatar"
-          height="100"
-          width="100"
-          className="rounded-full h-10 w-10"
-        />
-        <p className="text-xs text-neutral-500">
-          There are a lot of cool framerworks out there like React, Angular,
-          Vue, Svelte that can make your life ....
+        <div className="h-8 w-8 rounded-full bg-gradient-to-r from-orange-500 to-red-500 shrink-0 flex items-center justify-center">
+          <IconReportMedical className="h-4 w-4 text-white" />
+        </div>
+        <p className="text-xs text-orange-200 flex-1">
+          Patient reports: Headache, fever, and fatigue for 2 days. No known allergies.
         </p>
       </motion.div>
+      
       <motion.div
-        variants={variantsSecond}
-        className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2 items-center justify-end space-x-2 w-3/4 ml-auto bg-white dark:bg-black"
+        variants={responseVariants}
+        className="flex flex-row rounded-2xl border border-red-500/30 p-3 items-center justify-end space-x-3 w-4/5 ml-auto bg-red-900/20 backdrop-blur-sm"
       >
-        <p className="text-xs text-neutral-500">Use PHP.</p>
-        <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 shrink-0" />
+        <p className="text-xs text-red-200">Possible: Viral infection</p>
+        <div className="h-8 w-8 rounded-full bg-gradient-to-r from-red-500 to-pink-500 shrink-0 flex items-center justify-center">
+          <IconStethoscope className="h-4 w-4 text-white" />
+        </div>
       </motion.div>
     </motion.div>
   );
 };
+
 const items = [
   {
-    title: "AI Content Generation",
+    title: "Voice Assistant",
     description: (
-      <span className="text-sm">
-        Experience the power of AI in generating unique content.
+      <span className="text-sm text-slate-300">
+        Natural voice interactions for seamless patient communication and support.
       </span>
     ),
-    header: <SkeletonOne />,
+    header: <VoiceAssistantSkeleton />,
     className: "md:col-span-1",
-    icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
+    icon: <IconMicrophone className="h-5 w-5 text-cyan-400" />,
   },
   {
-    title: "Automated Proofreading",
+    title: "Appointment Scheduling",
     description: (
-      <span className="text-sm">
-        Let AI handle the proofreading of your documents.
+      <span className="text-sm text-slate-300">
+        AI-powered scheduling that optimizes your calendar and reduces no-shows.
       </span>
     ),
-    header: <SkeletonTwo />,
+    header: <AppointmentScheduler />,
     className: "md:col-span-1",
-    icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
+    icon: <IconCalendarEvent className="h-5 w-5 text-emerald-400" />,
   },
   {
-    title: "Contextual Suggestions",
+    title: "Health Monitoring",
     description: (
-      <span className="text-sm">
-        Get AI-powered suggestions based on your writing context.
+      <span className="text-sm text-slate-300">
+        Continuous tracking of vital signs and health metrics with AI analysis.
       </span>
     ),
-    header: <SkeletonThree />,
+    header: <HealthMonitoring />,
     className: "md:col-span-1",
-    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+    icon: <IconHeartbeat className="h-5 w-5 text-blue-400" />,
   },
   {
-    title: "Sentiment Analysis",
+    title: "Patient Management",
     description: (
-      <span className="text-sm">
-        Understand the sentiment of your text with AI analysis.
+      <span className="text-sm text-slate-300">
+        Comprehensive patient profiles with real-time status updates and care plans.
       </span>
     ),
-    header: <SkeletonFour />,
+    header: <PatientProfiles />,
     className: "md:col-span-2",
-    icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
+    icon: <IconUserCheck className="h-5 w-5 text-purple-400" />,
   },
-
   {
-    title: "Text Summarization",
+    title: "Symptom Analysis",
     description: (
-      <span className="text-sm">
-        Summarize your lengthy documents with AI technology.
+      <span className="text-sm text-slate-300">
+        AI-driven symptom assessment and preliminary diagnosis support.
       </span>
     ),
-    header: <SkeletonFive />,
+    header: <SymptomAnalysis />,
     className: "md:col-span-1",
-    icon: <IconBoxAlignRightFilled className="h-4 w-4 text-neutral-500" />,
+    icon: <IconReportMedical className="h-5 w-5 text-orange-400" />,
   },
 ];
