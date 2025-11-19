@@ -61,39 +61,9 @@ The platform uses cutting-edge AI models (Google Gemini) to understand patient s
 
 ### 🧠 AI-Powered Medical Intelligence
 - **Symptom Analysis**: Advanced AI models analyze patient symptoms
-- **Specialist Recommendations**: Intelligent matching with 11+ medical specialists
 - **Medical Report Generation**: Automated generation of comprehensive session reports
 - **Contextual Understanding**: Maintains conversation context throughout sessions
 
-### 👨‍⚕️ Multiple Medical Specialists
-The platform includes AI agents for:
-- General Physician
-- Pediatrician
-- Dermatologist
-- Orthopedic Surgeon
-- Psychiatrist
-- ENT Specialist
-- Oncologist
-- Ophthalmologist
-- Urologist
-- Gastroenterologist
-- Endocrinologist
-
-### 🔐 Security & Authentication
-- **Clerk Authentication**: Secure user authentication and session management
-- **Protected Routes**: Middleware-based route protection
-- **User Context**: Secure user data handling
-
-### 📊 Session Management
-- **Session History**: Complete history of all consultations
-- **Report Viewing**: Detailed view of generated medical reports
-- **Session Tracking**: Track notes, selected doctors, and conversations
-
-### 🎨 Modern UI/UX
-- **Responsive Design**: Mobile and desktop compatible
-- **Dark Theme**: Modern dark mode interface
-- **Animations**: Smooth transitions using Framer Motion
-- **Accessible**: Built with accessibility in mind
 
 ---
 
@@ -137,53 +107,7 @@ The platform includes AI agents for:
 6. **Report Generation**: AI generates comprehensive medical report
 7. **Data Storage**: All data stored in Neon PostgreSQL database
 
-### Component Architecture
 
-- **App Router**: Next.js 15 App Router with route groups
-- **Server Components**: Default server-side rendering
-- **Client Components**: Interactive UI with React hooks
-- **API Routes**: Serverless API endpoints
-- **Middleware**: Route protection and authentication
-
----
-
-## 🧰 Tech Stack
-
-### Frontend
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **Next.js** | 15.3.4 | React framework with App Router |
-| **React** | 19.0.0 | UI library |
-| **TypeScript** | 5.x | Type-safe JavaScript |
-| **Tailwind CSS** | 4.x | Utility-first CSS framework |
-| **Framer Motion** | 12.23.24 | Animation library |
-| **Radix UI** | Latest | Accessible component primitives |
-| **Lucide React** | 0.523.0 | Icon library |
-| **Sonner** | 2.0.5 | Toast notifications |
-
-### Backend & Services
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **Next.js API Routes** | 15.3.4 | Serverless API endpoints |
-| **Clerk** | 6.35.2 | Authentication & user management |
-| **Google Gemini AI** | 2.0 Flash | AI model for medical analysis |
-| **OpenAI (OpenRouter)** | 5.8.0 | Alternative AI provider |
-| **Vapi AI** | 2.5.1 | Voice interface SDK |
-| **Groq SDK** | 0.36.0 | Fast AI inference |
-
-### Database & ORM
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **Neon PostgreSQL** | Latest | Serverless PostgreSQL database |
-| **Drizzle ORM** | 0.44.7 | Type-safe SQL ORM |
-| **Drizzle Kit** | 0.31.7 | Database migrations & introspection |
-
-### Development Tools
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **TypeScript** | 5.x | Type checking |
-| **ESLint** | Latest | Code linting |
-| **PostCSS** | Latest | CSS processing |
 
 ---
 
@@ -268,7 +192,7 @@ Before you begin, ensure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/sasaurabh11/CareBuddy.git
 cd carebuddy
 ```
 
@@ -356,34 +280,6 @@ The database schema includes two main tables:
 
 ---
 
-## 🗄️ Database Setup
-
-### Schema Overview
-
-#### Users Table
-```sql
-CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  email VARCHAR(255) NOT NULL UNIQUE,
-  credits INTEGER
-);
-```
-
-#### Session Chat Table
-```sql
-CREATE TABLE "sessionChatTable" (
-  id SERIAL PRIMARY KEY,
-  "sessionId" VARCHAR(255) NOT NULL,
-  notes TEXT,
-  "selectedDoctor" JSONB,
-  conversation JSONB,
-  report JSONB,
-  "createdBy" VARCHAR(255) REFERENCES users(email),
-  "createdOn" VARCHAR(255)
-);
-```
-
 ### Running Migrations
 
 ```bash
@@ -429,140 +325,6 @@ npm start
 npm run lint
 ```
 
----
-
-## 📡 API Reference
-
-### Session Management
-
-#### Create Session
-```http
-POST /api/session-chat
-Content-Type: application/json
-
-{
-  "notes": "Patient symptoms description",
-  "selectedDoctor": {
-    "id": 1,
-    "specialist": "General Physician",
-    ...
-  }
-}
-```
-
-**Response:**
-```json
-{
-  "SessionChatTable": {
-    "id": 1,
-    "sessionId": "uuid",
-    "notes": "...",
-    "createdOn": "...",
-    ...
-  }
-}
-```
-
-#### Get Session(s)
-```http
-GET /api/session-chat?sessionId=all
-GET /api/session-chat?sessionId={sessionId}
-```
-
-### Doctor Recommendations
-
-#### Suggest Doctors
-```http
-POST /api/suggest-doctors
-Content-Type: application/json
-
-{
-  "notes": "Patient symptoms"
-}
-```
-
-**Response:**
-```json
-{
-  "suggested_doctors": [
-    {
-      "id": 1,
-      "specialist": "General Physician",
-      "description": "...",
-      ...
-    }
-  ]
-}
-```
-
-### Medical Reports
-
-#### Generate Report
-```http
-POST /api/medical-report
-Content-Type: application/json
-
-{
-  "sessionId": "uuid",
-  "sessionDetail": {
-    "specialist": "...",
-    ...
-  },
-  "messages": [...]
-}
-```
-
-**Response:**
-```json
-{
-  "sessionId": "uuid",
-  "agent": "...",
-  "user": "...",
-  "timestamp": "ISO Date",
-  "chiefComplaint": "...",
-  "summary": "...",
-  "symptoms": [...],
-  "duration": "...",
-  "severity": "...",
-  "medicationsMentioned": [...],
-  "recommendations": [...]
-}
-```
-
-### User Management
-
-#### Get/Create Users
-```http
-GET /api/users
-POST /api/users
-```
-
----
-
-## 🧩 Key Components
-
-### Dashboard Components
-
-- **`AppHeader`**: Main dashboard header with navigation
-- **`AddNewSessionDialog`**: Dialog for creating new medical sessions
-- **`DoctorsAgentList`**: List of available AI doctor agents
-- **`DoctorAgentCard`**: Individual doctor agent card
-- **`HistoryList`**: List of past sessions
-- **`HistoryTable`**: Table view of session history
-- **`ViewReportDialog`**: Dialog for viewing medical reports
-- **`SuggestedDoctorCard`**: Card for AI-suggested doctors
-
-### Medical Agent Interface
-
-- **`MedicalVoiceAgent`**: Main voice interaction component
-- Handles real-time voice conversations
-- Integrates with Vapi AI for voice processing
-- Manages conversation state and AI responses
-
-### Shared Components
-
-- **`FeatureBentoGrid`**: Feature showcase grid on landing page
-- **UI Components**: Reusable shadcn/ui components (Button, Dialog, Table, etc.)
 
 ---
 
@@ -620,50 +382,6 @@ Run migrations before or during deployment:
 ```bash
 npx drizzle-kit push
 ```
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-### Contribution Guidelines
-
-- Follow TypeScript best practices
-- Maintain code style consistency
-- Add tests for new features
-- Update documentation
-- Follow commit message conventions
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
----
-
-## 🙏 Acknowledgments
-
-- [Next.js](https://nextjs.org) - React framework
-- [Clerk](https://clerk.com) - Authentication
-- [Google Gemini](https://deepmind.google/technologies/gemini/) - AI models
-- [Vapi AI](https://vapi.ai) - Voice interface
-- [Neon](https://neon.tech) - Serverless PostgreSQL
-- [Drizzle ORM](https://orm.drizzle.team) - Type-safe ORM
-- [shadcn/ui](https://ui.shadcn.com) - UI components
-
----
-
-## 📞 Support
-
-For support, email support@carebuddy.com or open an issue in the repository.
 
 ---
 
